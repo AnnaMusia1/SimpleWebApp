@@ -18,9 +18,12 @@ app = Flask(__name__)
 def index():
 # we can also add some html
 #    return "<h1>Hello</h1> World!"
+
 # we can also start a template with html code - render_template with the name of the file
 # the file needs to be in "templates" folder
-    return render_template("index.html")
+
+# current_title - variable to use in html file (Jinja template in flask)
+    return render_template("index.html", current_title='Custom title')
 
 if __name__ == "__main__":
     app.run(debug=True)
