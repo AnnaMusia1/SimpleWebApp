@@ -1,5 +1,4 @@
-﻿from flask import Flask, render_template
-
+﻿from flask import Flask
 
 __name__ = "__main__"
 # The file app.py will be an entry point for our webapp application.
@@ -10,25 +9,30 @@ __name__ = "__main__"
 
 # Initialize the app instance
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "secret-key"
 
-# decorator to tell our server, that at this path we want to run this function
-# we could use multiple routes for the same function, and this will update the server automatically@
-@app.route("/")
-@app.route("/index")
-def index():
-# we can also add some html
-#    return "<h1>Hello</h1> World!"
+# # decorator to tell our server, that at this path we want to run this function
+# # we could use multiple routes for the same function, and this will update the server automatically@
+# @app.route("/")
+# @app.route("/index")
+# def index():
+# # we can also add some html
+# #    return "<h1>Hello</h1> World!"
+#
+# # we can also start a template with html code - render_template with the name of the file
+# # the file needs to be in "templates" folder
+#
+# # current_title - variable to use in html file (Jinja template in flask)
+#     return render_template("index.html", current_title='Custom title')
+#
+# @app.route("/about")
+# def about():
+#     return render_template("about.html")
 
-# we can also start a template with html code - render_template with the name of the file
-# the file needs to be in "templates" folder
+# import all content from routes file
 
-# current_title - variable to use in html file (Jinja template in flask)
-    return render_template("index.html", current_title='Custom title')
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
+from routes import *
 
 if __name__ == "__main__":
     app.run(debug=True)
-    # setting debug argument to true, gives us some debig functionality from flask
+    # setting debug argument to true, gives us some debug functionality from flask
