@@ -1,5 +1,6 @@
 ﻿from flask import Flask
 
+
 __name__ = "__main__"
 # The file app.py will be an entry point for our webapp application.
 # We will execute it from the command line.
@@ -10,6 +11,9 @@ __name__ = "__main__"
 # Initialize the app instance
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret-key"
+
+# import all content from routes file
+from routes import *
 
 # # decorator to tell our server, that at this path we want to run this function
 # # we could use multiple routes for the same function, and this will update the server automatically@
@@ -29,9 +33,9 @@ app.config["SECRET_KEY"] = "secret-key"
 # def about():
 #     return render_template("about.html")
 
-# import all content from routes file
 
-from routes import *
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
