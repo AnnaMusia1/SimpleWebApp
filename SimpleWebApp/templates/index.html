@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Task menager</title>
-</head>
-<body>
-<!--current_title - variable from python file, wrote in double courly braces {{ }}-->
-<h1>{{current_title}}</h1>
-<p>Some Content</p>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block main %}
+<p>Some content on the home page!</p>
+{% endblock %}

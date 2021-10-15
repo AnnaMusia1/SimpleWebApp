@@ -25,6 +25,10 @@ def index():
 # current_title - variable to use in html file (Jinja template in flask)
     return render_template("index.html", current_title='Custom title')
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
     # setting debug argument to true, gives us some debig functionality from flask
