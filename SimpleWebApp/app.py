@@ -1,4 +1,5 @@
 ﻿from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 
 __name__ = "__main__"
@@ -12,6 +13,10 @@ __name__ = "__main__"
 app = Flask(__name__)
 # config is necessary for working the {{ form.csrf_token() }} in about file
 app.config["SECRET_KEY"] = "secret-key"
+# we also need a config for SQLalchemy
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+
+db = SQLAlchemy(app)
 
 # import all content from routes file
 from routes import *
