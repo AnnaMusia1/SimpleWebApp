@@ -12,8 +12,12 @@ import forms
 def index():
     return render_template("index.html")
 
-
-@app.route("/about")
+# we can give a list of methods, that are allowed
+@app.route("/about", methods=["GET", "POST"])
 def about():
     form = forms.AddTaskForm()
+    if form.validate_on_submit():
+        print("Submitted title", form.title.data)
+        # title - property added to about.html
+        return render_template("about.html", form=form, title=form.title.data)
     return render_template("about.html", form=form)

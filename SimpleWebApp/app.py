@@ -10,6 +10,7 @@ __name__ = "__main__"
 
 # Initialize the app instance
 app = Flask(__name__)
+# config is necessary for working the {{ form.csrf_token() }} in about file
 app.config["SECRET_KEY"] = "secret-key"
 
 # import all content from routes file
