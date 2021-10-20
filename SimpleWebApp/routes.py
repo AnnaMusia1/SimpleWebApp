@@ -65,4 +65,25 @@ def edit(task_id):
         form.title.data = task.title
         # we return the edit template, where we pass the form with the task's info and task id
         return render_template("edit.html", form=form, task_id=task_id)
+    else:
+        flash("Task not found")
     return redirect(url_for('index'))
+
+
+@app.route("/delete/<int:task_id>", methods=["GET", "POST"])
+def delete(task_id):
+    task = Task.query.get(task_id)
+    form = forms.DeleteTaskForm()
+
+    if task:
+        # if the "delete" was clicked
+        if form.validate_on_submit():
+            db.session.delete(task)
+            db.session.commit()
+            flash("Task has been deleted")
+            return redirect(url_for("index"))
+        # so long, that the "delete isn't clicked"
+        return render_template("delete.html", form=form, task_id=task_id, title=task.title)
+    else:
+        flash("Task not found")
+    return redirect(url_for("index"))
