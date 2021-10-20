@@ -2,18 +2,21 @@
 # then, we will keep the routes here, and all the content import in app file
 # so we need to import the app instance, and render_template
 from app import app, db
-from flask import render_template, redirect, url_for
-from models import Task
+# flash and get_flashed_messages methods are convenient way to display some information on our webpages (f.e alert messages)
+from flask import render_template, redirect, url_for, flash, get_flashed_messages
+#from models import Task
 from datetime import datetime
 
+import models
 import forms
+
 
 
 @app.route("/")
 @app.route("/index")
 def index():
     # we create a list of tasks
-    tasks = Task.query.all()
+    tasks = models.Task.query.all()
     # and we pass them to the index page
     return render_template("index.html", tasks=tasks)
 
@@ -22,12 +25,17 @@ def index():
 def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
-        t = Task(title=form.title.data, date=datetime.utcnow())
+        t = models.Task(title=form.title.data, date=datetime.utcnow())
         db.session.add(t)
         db.session.commit()
         print("Submitted title", form.title.data)
+
         # title - property added to add.html
  #       return render_template("add.html", form=form, title=form.title.data)
+
+        # before redirect to index we want to display some message that the task was saved
+        flash("Task added to the database")
+
         # we want to send content of db to index page, so the tasks are listed then
         # and we are automatically moved to the index page after submitting
         return redirect(url_for('index'))
