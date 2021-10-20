@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
+
 {% block main %}
-  {% for task in tasks %}
 <h2>Tasks</h2>
+  {% for task in tasks %}
+
     <div class="card">
       <div class="card-body">
         <h3>{{ task.title }}</h3>
         <p>Added on {{ task.date }}</p>
-        <a href="#" class="btn btn-primary">Edit</a>
+        <a href="{{ url_for('edit', task_id=task.id) }}" class="btn btn-primary">Edit</a>
         <a href="#" class="btn btn-danger">Delete</a>
       </div>
     </div>

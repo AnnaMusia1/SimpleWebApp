@@ -4,4 +4,13 @@ as index and about files share big part of the code, the "base" file is created 
 so, basically it contains all the code from index and about, without the last line.
 Instead of the last line, we put a placeholder:{% "block/endblock main" %}
 
-Then, in index and about, we just need the {% extends.html %}
+Then, in index and about, we just need the {% extends base.html %}
+
+In the base.html we have {% with message = get_flashed_messages() %}
+That function will fetch all the pending messages, which have not been displayed yet,
+which were passed to the flash() function.
+Once we have a list of those messages, we just iterate throuh it, and print them as a message.
+
+In index.html:
+        <a href="{{ url_for('edit', task_id=task.id) }}" class="btn btn-primary">Edit</a>
+that means, that the button redirect to the edit() function for the task, and we pass to it the task_it
